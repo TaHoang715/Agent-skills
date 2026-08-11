@@ -5,7 +5,7 @@ description: Curated UI/UX design system resources, color palettes, icons, CSS f
 
 # UI/UX Design System & Resources Skill
 
-This skill incorporates the curated design knowledge base from `bradtraversy/design-resources-for-developers` (located locally at `D:\design-resources-for-developers`).
+This skill incorporates the curated design knowledge base from `bradtraversy/design-resources-for-developers` (located locally at `D:\skills_resources\design-resources-for-developers`).
 
 Use this skill whenever designing, scaffolding, or refactoring user interfaces to ensure rich aesthetics, curated color palettes, dynamic micro-animations, consistent icon sets, and state-of-the-art visual presentation.
 
@@ -74,7 +74,7 @@ An interface must feel alive and responsive:
 
 ---
 
-## 🛠️ 5. Local Reference Directory
+## 📂 5. Local Reference Directory
 
 Full curated link lists for Stock Photos, UI Component Kits, Frameworks, and Tools can be inspected at:
-- `D:\design-resources-for-developers\readme.md`
+- `D:\skills_resources\design-resources-for-developers\readme.md`
