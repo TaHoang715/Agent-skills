@@ -1,49 +1,83 @@
-# 🚀 HƯỚNG DẪN THIẾT LẬP CLAUDE CODE & BỘ SKILLS CHUẨN CHO ĐỒ ÁN SEP490
-### 🛠️ TECH STACK DỰ ÁN: ASP.NET Core (.NET 8+) Backend & Next.js App Router Frontend
+# Agent Skills & Claude Code Configuration Environment
 
-Tài liệu này hướng dẫn tất cả thành viên trong nhóm đồ án **SEP490** cài đặt và đồng bộ hóa môi trường **Claude Code & Antigravity AI Agent** cùng bộ **Skills chuyên biệt cho .NET & Next.js** giúp code sạch, đúng kiến trúc và tự động lưu vết bối cảnh dự án.
+![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)
+![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript)
+![License](https://img.shields.io/badge/License-MIT-green)
 
----
-
-## 📌 1. TỔNG QUAN BỘ SKILLS CHUẨN ĐƯỢC ĐỒNG BỘ NẠP CHO AI
-
-Bộ Skills này nạp sẵn tri thức chuyên sâu cho **.NET + Next.js**:
-
-| Nhóm Skill | Tên Skill (.md) | Công Dụng Cho AI Agent |
-|---|---|---|
-| 🔷 **Backend .NET** | `dotnet-backend` | Chuẩn hóa ASP.NET Core Web API, Entity Framework Core (EF Core), DTOs, Repository Pattern, Dependency Injection (DI) & Async/Await C#. |
-| ⚛️ **Frontend Next.js** | `nextjs-best-practices` | Chuẩn hóa Next.js App Router (Server Components, Client Components, Server Actions, Dynamic Routing). |
-| 🧠 **Luật Karpathy** | `karpathy-claude-rules` | Ép AI tuân thủ 4 Luật Vàng (Suy nghĩ kỹ trước khi code, Tối giản, Sửa đúng vị trí phẫu thuật, Chạy test xác nhận thực tế). |
-| 💾 **Bộ Nhớ Tự Động** | `agent-memory-hub` | Tự động ghi chép cấu trúc CSDL, API Endpoints và bài học dự án vào `MEMORY.md`. |
-| 🔌 **API Standards** | `api-patterns` | Chuẩn hóa định dạng JSON Response, JWT Auth, Swagger/OpenAPI & Rate Limiting. |
-| 🎨 **UI/UX & Components** | `ui-design-resources` | Phối màu Dark/Light Mode chuẩn HSL, Icon Lucide/Heroicons & TailwindCSS. |
-| 🐻 **State Management** | `zustand-store-ts` | Quản lý State toàn cục TypeScript mượt mà với Zustand cho Next.js. |
-| 🛡️ **Code Sạch & Debug** | `clean-code-best-practices` | Quản lý exception fail-fast, bắt lỗi tập trung (Global Exception Handler) & Security. |
+Standardized AI agent environment, engineering rules, and persistent memory skills for capstone project **SEP490**. Configured for high-performance development using **ASP.NET Core Web API** (.NET 8+) and **Next.js App Router** (React / TypeScript).
 
 ---
 
-## 🛠️ 2. HƯỚNG DẪN CÀI ĐẶT TỪNG BƯỚC CHO MEMBER
+## Architecture Overview
 
-### BƯỚC 1: CÀI ĐẶT CLAUDE CODE CLI
-Mở **PowerShell / Terminal** và chạy:
-
-```bash
-# 1. Cài đặt Claude Code toàn cục
-npm install -g @anthropic-ai/claude-code
-
-# 2. Khởi chạy và đăng nhập tài khoản Anthropic
-claude
+```text
+SEP490 Agent Skills Environment
+├── .claude/
+│   └── settings.json          # Shared team configuration & permissions
+├── skills/                    # Modular engineering skill definitions
+│   ├── dotnet-backend/        # ASP.NET Core & EF Core standards
+│   ├── nextjs-best-practices/ # Next.js App Router & Server Components
+│   ├── karpathy-claude-rules/ # Core agent laws (Simplicity, Surgical edits)
+│   ├── agent-memory-hub/      # Persistent cross-session project memory
+│   ├── api-patterns/          # RESTful JSON contracts & JWT Authentication
+│   ├── ui-design-resources/   # UI Tokens, HSL palettes & SVG icons
+│   └── clean-code-best-practices/ # Global exception handling & security
+└── MEMORY.md                  # Project state & architectural decision records
 ```
 
 ---
 
-### BƯỚC 2: CẤU HÌNH FILE `settings.json` CHO CLAUDE CODE
+## Prerequisites
 
-Tạo file cấu hình tại đường dẫn cá nhân của bạn:
-* **Windows**: `C:\Users\<Tên_User>\.claude\settings.json`
-* **Mac/Linux**: `~/.claude/settings.json`
+Before setting up the environment, ensure your development machine has the following tools installed:
 
-Dán toàn bộ nội dung cấu hình chuẩn sau vào file `settings.json`:
+- **Node.js**: `v18.x` or higher
+- **.NET SDK**: `8.0` or higher
+- **Git**: `2.x` or higher
+- **Claude Code CLI**: Installed globally via `npm`
+
+---
+
+## Setup Instructions
+
+### 1. Install Claude Code CLI
+
+Install the official Anthropic Claude Code command-line tool:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+Run authentication once to link your user workspace:
+
+```bash
+claude
+```
+
+### 2. Configure Environment Settings
+
+Copy the standardized team settings to your global user profile:
+
+#### Windows (PowerShell)
+
+```powershell
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude" -Force | Out-Null
+Copy-Item -Force "claude_settings_template.json" "$env:USERPROFILE\.claude\settings.json"
+```
+
+#### macOS / Linux
+
+```bash
+mkdir -p ~/.claude
+cp claude_settings_template.json ~/.claude/settings.json
+```
+
+---
+
+## Pre-Approved Terminal Permissions
+
+The provided `settings.json` enables extended reasoning (`"thinking": true`) and pre-approves routine build and test commands to maintain focus during development:
 
 ```json
 {
@@ -66,64 +100,49 @@ Dán toàn bộ nội dung cấu hình chuẩn sau vào file `settings.json`:
 }
 ```
 
-> 💡 **Giải thích**: 
-> * `"thinking": true`: Bật chế độ Extended Thinking giúp Claude suy nghĩ kỹ logic trước khi viết code C# & TypeScript.
-> * `"allowCommands"`: Phê duyệt sẵn các lệnh `.NET` (`dotnet build`, `dotnet ef`) và `npm` để Claude tự động thực thi mà không phải xin phép rườm rà.
-
 ---
 
-### BƯỚC 3: TẢI BỘ KHO REPOSITORIES TRI THỨC VỀ MÁY (KHUYÊN DÙNG Ổ D)
+## Project Memory Protocol (`MEMORY.md`)
 
-Mở **PowerShell / Terminal** và chạy lệnh clone toàn bộ kho tài nguyên về máy:
+Each repository using this environment maintains a `MEMORY.md` file in its root directory. This serves as the agent's long-term persistent context across different sessions and team members.
 
-```powershell
-# Tạo thư mục lưu trữ tri thức
-New-Item -ItemType Directory -Path "D:\skills_resources" -Force
-
-# Clone các bộ tri thức hàng đầu
-git clone https://github.com/forrestchang/andrej-karpathy-skills.git D:\skills_resources\andrej-karpathy-skills
-git clone https://github.com/TencentCloud/TencentDB-Agent-Memory.git D:\skills_resources\TencentDB-Agent-Memory
-git clone https://github.com/donnemartin/system-design-primer.git D:\skills_resources\system-design-primer
-git clone https://github.com/goldbergyoni/nodebestpractices.git D:\skills_resources\nodebestpractices
-git clone https://github.com/bradtraversy/design-resources-for-developers.git D:\skills_resources\design-resources-for-developers
-git clone https://github.com/30-seconds/30-seconds-of-code.git D:\skills_resources\30-seconds-of-code
-```
-
----
-
-### BƯỚC 4: BẬT BỘ NHỚ TỰ ĐỘNG `MEMORY.MD` CHO DỰ ÁN NHÓM
-
-Khi khởi tạo thư mục code Đồ án **SEP490**, tạo 1 file tên là `MEMORY.md` ở thư mục gốc của dự án với nội dung mẫu:
+### Recommended `MEMORY.md` Template
 
 ```markdown
-# 🧠 SEP490 PROJECT MEMORY (.NET 8 + NEXT.JS)
+# Project Memory & Architectural Context
 
-## 1. Tech Stack
-- Backend: ASP.NET Core Web API (.NET 8/9), Entity Framework Core, PostgreSQL / SQL Server
-- Frontend: Next.js App Router (React, TypeScript, TailwindCSS, Zustand)
-- Auth: JWT Bearer Authentication / Identity
+## Tech Stack
+- Backend: ASP.NET Core (.NET 8), Entity Framework Core, PostgreSQL
+- Frontend: Next.js App Router, TypeScript, TailwindCSS, Zustand
+- Authentication: JWT Bearer Tokens
 
-## 2. Quy chuẩn lập trình nhóm
-- Backend C#: Áp dụng Controller / Service / Repository pattern, DI Injection, EF Core Async.
-- Frontend React: Áp dụng Next.js App Router, Server Components cho render dữ liệu, Zustand cho state client.
-- Áp dụng 4 Luật Karpathy: Suy nghĩ trước khi code, Code tối giản, Sửa chính xác, Run `dotnet build` & `npm run build` xác nhận thực tế.
+## Active Decisions
+- Use Repository and Service patterns for C# backend modules.
+- Use Server Components for data fetching; Client Components for interactive UI state.
+
+## Current Sprint Tasks
+- [x] Initialized database schema migration
+- [/] Implementing User Authentication API
+- [ ] Building Dashboard Frontend Components
 ```
 
 ---
 
-## 🎯 3. CÁCH GIAO VIỆC CHO CLAUDE CODE KHI LÀM ĐỒ ÁN (.NET & NEXT.JS)
+## Development Workflow & Prompt Examples
 
-Khi mở Claude Code trong dự án (`claude`), bạn chỉ cần giao việc bằng tiếng Việt tự nhiên:
+When executing tasks with Claude Code (`claude`), use structured instructions matching your target component:
 
-* 🔷 **Làm Backend ASP.NET Core**: 
-  > *"Tham khảo skill dotnet-backend và api-patterns để viết Controller & Service quản lý Người dùng bằng EF Core C#. Tạo DTOs riêng, dùng Async/Await và trả về JSON chuẩn ResultResponse."*
-* ⚛️ **Làm Frontend Next.js**: 
-  > *"Tham khảo skill nextjs-best-practices và ui-design-resources để viết trang Dashboard bằng Next.js App Router (React/TypeScript). Dùng TailwindCSS màu Dark Mode Slate-950 và gọi API .NET vừa viết."*
-* 🗄️ **Làm Database / Migration**: 
-  > *"Tham khảo skill database-admin để tạo Migration EF Core cho bảng Orders và Products, chạy `dotnet ef database update` và kiểm tra mối quan hệ 1-N."*
-* 🧪 **Sửa Bug & Kiểm thử**: 
-  > *"Đọc file MEMORY.md, phân tích nguyên nhân lỗi trong Controller/Page này, sửa đúng vị trí và chạy `dotnet build` / `npm run build` xác nhận."*
+### Backend Development (.NET 8)
+> "Refer to `dotnet-backend` and `api-patterns` skills. Implement the Order Service using EF Core async queries. Include DTO mapping and global exception handling."
+
+### Frontend Development (Next.js)
+> "Refer to `nextjs-best-practices` and `ui-design-resources` skills. Create the Dashboard page using Next.js App Router with Server Components for initial load and TailwindCSS dark mode styling."
+
+### Verification & Bug Fixing
+> "Check `MEMORY.md` for recent API changes. Identify the root cause of the error in OrderController.cs, apply surgical edits, and run `dotnet build` to verify."
 
 ---
 
-🎉 **CHÚC NHÓM SEP490 LÀM ĐỒ ÁN THÀNH CÔNG VÀ ĐẠT ĐIỂM 10 TUYỆT ĐỐI!** 🚀
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
