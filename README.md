@@ -1,24 +1,31 @@
-# 🚀 HƯỚNG DẪN THIẾT LẬP MÔI TRƯỜNG CLAUDE CODE & BỘ SKILLS CHUẨN ĐỒ ÁN SEP490
+# 🚀 HƯỚNG DẪN THIẾT LẬP CLAUDE CODE & BỘ SKILLS CHUẨN CHO ĐỒ ÁN SEP490
+### 🛠️ TECH STACK DỰ ÁN: ASP.NET Core (.NET 8+) Backend & Next.js App Router Frontend
 
-Tài liệu này hướng dẫn tất cả thành viên trong nhóm đồ án **SEP490** cài đặt và đồng bộ hóa môi trường **Claude Code AI Agent** cùng bộ **Skills & Cấu hình chuẩn** giúp làm việc chung hiệu quả, code sạch và không mất bối cảnh dự án.
+Tài liệu này hướng dẫn tất cả thành viên trong nhóm đồ án **SEP490** cài đặt và đồng bộ hóa môi trường **Claude Code & Antigravity AI Agent** cùng bộ **Skills chuyên biệt cho .NET & Next.js** giúp code sạch, đúng kiến trúc và tự động lưu vết bối cảnh dự án.
 
 ---
 
-## 📌 1. TỔNG QUAN HỆ THỐNG SKILLS ĐƯỢC ĐỒNG BỘ
+## 📌 1. TỔNG QUAN BỘ SKILLS CHUẨN ĐƯỢC ĐỒNG BỘ NẠP CHO AI
 
-Bộ cấu hình này nạp sẵn 5 mảng tri thức hàng đầu thế giới vào AI:
-1. 🧠 **Quy tắc Karpathy (`karpathy-claude-rules`)**: Ép AI suy nghĩ trước khi code, viết code tối giản, sửa chính xác như phẫu thuật và tự kiểm tra kết quả thật.
-2. 💾 **Bộ nhớ Agent Dài hạn (`agent-memory-hub`)**: Tự động lưu và đọc lại cấu trúc CSDL, API routes và bài học dự án qua file `MEMORY.md`.
-3. 🏗️ **Kiến trúc Hệ thống (`system-architecture-guide`)**: Chuẩn hóa thiết kế CSDL (Postgres/Redis), Microservices và phân tải Backend.
-4. 🛡️ **Code Sạch & Bảo mật (`clean-code-best-practices`)**: Quản lý lỗi fail-fast, bắt exception và bảo mật chống SQL Injection.
-5. 🎨 **Thiết kế UI/UX (`ui-design-resources`)**: Phối màu Dark/Light Mode chuẩn HSL, icon SVG sắc nét và hiệu ứng giao diện mượt mà.
+Bộ Skills này nạp sẵn tri thức chuyên sâu cho **.NET + Next.js**:
+
+| Nhóm Skill | Tên Skill (.md) | Công Dụng Cho AI Agent |
+|---|---|---|
+| 🔷 **Backend .NET** | `dotnet-backend` | Chuẩn hóa ASP.NET Core Web API, Entity Framework Core (EF Core), DTOs, Repository Pattern, Dependency Injection (DI) & Async/Await C#. |
+| ⚛️ **Frontend Next.js** | `nextjs-best-practices` | Chuẩn hóa Next.js App Router (Server Components, Client Components, Server Actions, Dynamic Routing). |
+| 🧠 **Luật Karpathy** | `karpathy-claude-rules` | Ép AI tuân thủ 4 Luật Vàng (Suy nghĩ kỹ trước khi code, Tối giản, Sửa đúng vị trí phẫu thuật, Chạy test xác nhận thực tế). |
+| 💾 **Bộ Nhớ Tự Động** | `agent-memory-hub` | Tự động ghi chép cấu trúc CSDL, API Endpoints và bài học dự án vào `MEMORY.md`. |
+| 🔌 **API Standards** | `api-patterns` | Chuẩn hóa định dạng JSON Response, JWT Auth, Swagger/OpenAPI & Rate Limiting. |
+| 🎨 **UI/UX & Components** | `ui-design-resources` | Phối màu Dark/Light Mode chuẩn HSL, Icon Lucide/Heroicons & TailwindCSS. |
+| 🐻 **State Management** | `zustand-store-ts` | Quản lý State toàn cục TypeScript mượt mà với Zustand cho Next.js. |
+| 🛡️ **Code Sạch & Debug** | `clean-code-best-practices` | Quản lý exception fail-fast, bắt lỗi tập trung (Global Exception Handler) & Security. |
 
 ---
 
 ## 🛠️ 2. HƯỚNG DẪN CÀI ĐẶT TỪNG BƯỚC CHO MEMBER
 
 ### BƯỚC 1: CÀI ĐẶT CLAUDE CODE CLI
-Mở **PowerShell / Terminal** trên máy bạn và chạy lệnh cài đặt:
+Mở **PowerShell / Terminal** và chạy:
 
 ```bash
 # 1. Cài đặt Claude Code toàn cục
@@ -45,10 +52,13 @@ Dán toàn bộ nội dung cấu hình chuẩn sau vào file `settings.json`:
   "preferredNotifiers": ["terminal"],
   "permissions": {
     "allowCommands": [
+      "dotnet build",
+      "dotnet test",
+      "dotnet run",
+      "dotnet ef migrations add",
       "npm test",
       "npm run dev",
       "npm run build",
-      "python -m pytest",
       "git status",
       "git diff"
     ]
@@ -57,8 +67,8 @@ Dán toàn bộ nội dung cấu hình chuẩn sau vào file `settings.json`:
 ```
 
 > 💡 **Giải thích**: 
-> * `"thinking": true`: Bật chế độ suy luận mở rộng (Extended Thinking) giúp Claude suy nghĩ kỹ logic trước khi sửa code.
-> * `"allowCommands"`: Phê duyệt sẵn các lệnh build/test an toàn để Claude không hỏi xin phép rườm rà.
+> * `"thinking": true`: Bật chế độ Extended Thinking giúp Claude suy nghĩ kỹ logic trước khi viết code C# & TypeScript.
+> * `"allowCommands"`: Phê duyệt sẵn các lệnh `.NET` (`dotnet build`, `dotnet ef`) và `npm` để Claude tự động thực thi mà không phải xin phép rườm rà.
 
 ---
 
@@ -83,33 +93,37 @@ git clone https://github.com/30-seconds/30-seconds-of-code.git D:\skills_resourc
 
 ### BƯỚC 4: BẬT BỘ NHỚ TỰ ĐỘNG `MEMORY.MD` CHO DỰ ÁN NHÓM
 
-Khi bắt đầu mở thư mục code Đồ án **SEP490**, tạo 1 file tên là `MEMORY.md` ở thư mục gốc của dự án với nội dung mẫu:
+Khi khởi tạo thư mục code Đồ án **SEP490**, tạo 1 file tên là `MEMORY.md` ở thư mục gốc của dự án với nội dung mẫu:
 
 ```markdown
-# 🧠 SEP490 PROJECT MEMORY
+# 🧠 SEP490 PROJECT MEMORY (.NET 8 + NEXT.JS)
 
-## 1. Công nghệ sử dụng
-- Frontend: Next.js (TailwindCSS, Lucide Icons)
-- Backend: Node.js / FastAPI (PostgreSQL, Redis)
+## 1. Tech Stack
+- Backend: ASP.NET Core Web API (.NET 8/9), Entity Framework Core, PostgreSQL / SQL Server
+- Frontend: Next.js App Router (React, TypeScript, TailwindCSS, Zustand)
+- Auth: JWT Bearer Authentication / Identity
 
-## 2. Quy chuẩn chung
-- Áp dụng 4 Luật Karpathy: Suy nghĩ trước khi code, Code tối giản, Sửa chính xác, Chạy test thực tế.
-- Tự động lưu tiến độ công việc và cấu trúc API vào MEMORY.md sau mỗi phiên làm việc.
+## 2. Quy chuẩn lập trình nhóm
+- Backend C#: Áp dụng Controller / Service / Repository pattern, DI Injection, EF Core Async.
+- Frontend React: Áp dụng Next.js App Router, Server Components cho render dữ liệu, Zustand cho state client.
+- Áp dụng 4 Luật Karpathy: Suy nghĩ trước khi code, Code tối giản, Sửa chính xác, Run `dotnet build` & `npm run build` xác nhận thực tế.
 ```
 
 ---
 
-## 🎯 3. CÁCH GIAO VIỆC CHO CLAUDE CODE KHI LÀM ĐỒ ÁN
+## 🎯 3. CÁCH GIAO VIỆC CHO CLAUDE CODE KHI LÀM ĐỒ ÁN (.NET & NEXT.JS)
 
 Khi mở Claude Code trong dự án (`claude`), bạn chỉ cần giao việc bằng tiếng Việt tự nhiên:
 
-* 🏗️ **Làm Backend / API**: 
-  > *"Tham khảo quy chuẩn system-architecture-guide và clean-code-best-practices để thiết kế API Đăng ký / Đăng nhập có validate dữ liệu bằng Zod và bắt lỗi fail-fast."*
-* 🎨 **Làm Frontend / UI**: 
-  > *"Tham khảo quy chuẩn ui-design-resources để thiết kế giao diện Dashboard theo phong cách Dark Mode (Slate-950), nhúng icon Lucide và hiệu ứng hover mượt."*
-* 🧪 **Sửa Bug**: 
-  > *"Đọc file MEMORY.md, phân tích nguyên nhân rễ rễ của bug này, chỉ sửa đúng những dòng code liên quan và chạy test xác nhận."*
+* 🔷 **Làm Backend ASP.NET Core**: 
+  > *"Tham khảo skill dotnet-backend và api-patterns để viết Controller & Service quản lý Người dùng bằng EF Core C#. Tạo DTOs riêng, dùng Async/Await và trả về JSON chuẩn ResultResponse."*
+* ⚛️ **Làm Frontend Next.js**: 
+  > *"Tham khảo skill nextjs-best-practices và ui-design-resources để viết trang Dashboard bằng Next.js App Router (React/TypeScript). Dùng TailwindCSS màu Dark Mode Slate-950 và gọi API .NET vừa viết."*
+* 🗄️ **Làm Database / Migration**: 
+  > *"Tham khảo skill database-admin để tạo Migration EF Core cho bảng Orders và Products, chạy `dotnet ef database update` và kiểm tra mối quan hệ 1-N."*
+* 🧪 **Sửa Bug & Kiểm thử**: 
+  > *"Đọc file MEMORY.md, phân tích nguyên nhân lỗi trong Controller/Page này, sửa đúng vị trí và chạy `dotnet build` / `npm run build` xác nhận."*
 
 ---
 
-🎉 **CHÚC NHÓM SEP490 LÀM ĐỒ ÁN THÀNH CÔNG VÀ ĐẠT ĐIỂM CAO NHẤT!** 🚀
+🎉 **CHÚC NHÓM SEP490 LÀM ĐỒ ÁN THÀNH CÔNG VÀ ĐẠT ĐIỂM 10 TUYỆT ĐỐI!** 🚀
