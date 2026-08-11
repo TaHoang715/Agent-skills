@@ -1,0 +1,51 @@
+name: CI & Claude Code PR Auto-Review
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore .NET Dependencies
+        run: dotnet restore
+
+      - name: Build .NET Backend
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run .NET Unit Tests
+        run: dotnet test --no-build --configuration Release
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Frontend Dependencies
+        run: npm ci
+
+      - name: Build Next.js Frontend
+        run: npm run build
+
+  claude-pr-review:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Claude Code Automated PR Review
+        uses: anthropic-ai/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: "Review this Pull Request for security vulnerabilities, C# Entity Framework efficiency, Next.js Server Component performance, and adherence to clean code rules."
