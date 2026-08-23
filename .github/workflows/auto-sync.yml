@@ -1,0 +1,47 @@
+name: 🔄 Auto Sync Upstream Skills
+
+on:
+  schedule:
+    # Chạy tự động hàng ngày lúc 00:00 UTC (07:00 sáng giờ VN)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Cho phép bấm nút Sync thủ công bất cứ lúc nào trên GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Sync Latest Skills from Upstream
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch and Sync Upstream Skills
+        run: |
+          echo "Cloning latest upstream repository..."
+          git clone --depth 1 https://github.com/sickn33/antigravity-awesome-skills.git upstream_temp
+          
+          echo "Syncing skills..."
+          mkdir -p skills
+          cp -r upstream_temp/skills/* skills/
+          
+          rm -rf upstream_temp
+
+      - name: Commit and Push Changes
+        run: |
+          git add skills/
+          if git diff --staged --quiet; then
+            echo "✔ No new skill updates found. Repository is up-to-date!"
+          else
+            git commit -m "chore(auto-sync): update skills to latest upstream release [skip ci]"
+            git push origin main
+            echo "✔ Successfully synced and pushed latest skills!"
+          fi
