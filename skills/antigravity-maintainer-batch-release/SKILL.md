@@ -48,6 +48,7 @@ Before changing anything:
    - `manual-review-required` means Tessl credentials or credits were unavailable, or Tessl did not produce a passing result. Perform the maintainer semantic review and attest with `--reviewed-head <full-40-character-sha>`.
    - Any non-passing Tessl outcome produces `manual-review-required`; complete the semantic review and bind the judgment to the exact head instead of treating a heuristic score as merge authority.
    - Never report `manual-review-required` as “Tessl passed.”
+   - Scoped content-review fingerprints document exact bytes and observed checks, not general reliability. Keep explicit compatibility aliases and their complete local support bundles synchronized; the alias-integrity regression checks equality without affecting selection eligibility. Report remaining corpus debt rather than awarding an unqualified validation badge.
    - A verified upstream repository rename may bypass the provenance-identity blocker only through an exact entry in the trusted protected-base exception ledger. Record the skill ID, old and new `source_repo`, stable upstream repository ID, verification date, and canonical GitHub URL; all other provenance changes remain blocked.
 
 3. Run checks in parallel where independent.
@@ -80,6 +81,10 @@ Before changing anything:
 ## Workflow Contract Change Gate
 
 When changing maintainer scripts, workflows, or policy, update the canonical skill, maintainer documentation, and regression tests in the same source PR. Add a negative test for every failure mode being fixed, run the relevant dry-run path, and reject any implementation/documentation mismatch. Source PRs must exclude generated registries and plugin mirrors; the protected canonical-sync PR owns that derived state, except for files intentionally staged by the scripted protected-release flow.
+
+## Specialized Plugin Consistency
+
+Use `data/specialized-plugin-candidates.json` for specialized-plugin membership and `data/editorial-bundles.json` for the installable composition, descriptions, limits and starter prompts. Review changes against canonical `skills_index.json`; keep IDs stable unless a migration is explicitly requested. Derive the web catalog and prerender/live-verifier counts from these sources instead of maintaining copied lists or fixed counts. Verify full skill-list expansion, source-to-web parity and a negative stale-count case. The specialized-resource regression must reject missing prose-declared local support paths and verify their bytes in generated specialized bundles; fenced application examples remain a separate semantic review. Run the pure-example regressions when editing documented calculations or chunking behavior. Regenerate plugin artifacts as evidence, but leave their commit to the protected canonical-sync lane. A source refresh does not authorize release or deployment.
 
 ## Hosted Catalog and Legacy Redirect Bridge
 
